@@ -13,20 +13,19 @@
  ******************************************************************************/
 package org.eclipse.yasson.internal.serializer;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
-
-import javax.json.bind.serializer.JsonbDeserializer;
-import javax.json.stream.JsonParser;
-
 import org.eclipse.yasson.internal.JsonbParser;
 import org.eclipse.yasson.internal.JsonbRiParser;
 import org.eclipse.yasson.internal.ReflectionUtils;
 import org.eclipse.yasson.internal.Unmarshaller;
+
+import javax.json.bind.serializer.JsonbDeserializer;
+import javax.json.stream.JsonParser;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 /**
  * Item implementation for {@link java.util.Map} fields.
@@ -67,14 +66,7 @@ public class MapDeserializer<T extends Map<?,?>> extends AbstractContainerDeseri
     }
 
     private Map getMapImpl(Class ifcType, DeserializerBuilder builder) {
-        // SortedMap, NavigableMap
-        if (SortedMap.class.isAssignableFrom(ifcType)) {
-            Class<?> defaultMapImplType = builder.getJsonbContext().getConfigProperties().getDefaultMapImplType();
-            return SortedMap.class.isAssignableFrom(defaultMapImplType) ?
-                    (Map) builder.getJsonbContext().getInstanceCreator().createInstance(defaultMapImplType) :
-                    new TreeMap<>();
-        }
-        return new HashMap<>();
+        return new LinkedHashMap();
     }
 
     @Override

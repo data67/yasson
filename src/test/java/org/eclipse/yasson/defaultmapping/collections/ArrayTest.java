@@ -22,10 +22,7 @@ import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
 import javax.json.bind.JsonbConfig;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -68,8 +65,8 @@ public class ArrayTest {
 
         assertEquals(expected, jsonb.toJson(objectArray));
         Object[] result = jsonb.fromJson(expected, objectArray.getClass());
-        assertEquals(HashMap.class, result[0].getClass());
-        assertEquals(HashMap.class, result[1].getClass());
+        assertEquals(LinkedHashMap.class, result[0].getClass());
+        assertEquals(LinkedHashMap.class, result[1].getClass());
         assertEquals("first", ((Map) result[0]).get("field"));
         assertEquals("second", ((Map) result[1]).get("field"));
     }

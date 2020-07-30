@@ -35,14 +35,7 @@ import javax.json.bind.serializer.JsonbSerializer;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Optional;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.function.Function;
 
 /**
@@ -99,18 +92,7 @@ public class JsonbConfigProperties {
 
 
     private Class<?> initDefaultMapImplType() {
-        Optional<String> os = getPropertyOrderStrategy();
-        if (os.isPresent()) {
-            switch (os.get()) {
-                case PropertyOrderStrategy.LEXICOGRAPHICAL:
-                    return TreeMap.class;
-                case PropertyOrderStrategy.REVERSE:
-                    return ReverseTreeMap.class;
-                default:
-                    return HashMap.class;
-            }
-        }
-        return HashMap.class;
+        return LinkedHashMap.class;
     }
 
     private boolean initZeroTimeDefaultingForJavaTime() {

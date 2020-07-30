@@ -13,13 +13,7 @@
 package org.eclipse.yasson.internal;
 
 import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Creates instances for known types, caches constructors of unknown.
@@ -55,8 +49,7 @@ public class InstanceCreator {
         creators.put(LinkedList.class, LinkedList::new);
         creators.put(HashSet.class, HashSet::new);
         creators.put(TreeSet.class, TreeSet::new);
-        creators.put(HashMap.class, HashMap::new);
-        creators.put(TreeMap.class, TreeMap::new);
+        creators.put(LinkedHashMap.class, LinkedHashMap::new);
     }
 
     /**
